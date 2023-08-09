@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yimeimaven.dao.SysRoleDeptDao">
+  <resultMap id="BaseResultMap" type="com.example.yimeimaven.entity.SysRoleDeptKey">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <id column="dept_id" jdbcType="BIGINT" property="deptId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.yimeimaven.entity.SysRoleDeptKey">
+    delete from sys_role_dept
+    where role_id = #{roleId,jdbcType=BIGINT}
+      and dept_id = #{deptId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="role_id" keyProperty="roleId" parameterType="com.example.yimeimaven.entity.SysRoleDeptKey" useGeneratedKeys="true">
+    insert into sys_role_dept (dept_id)
+    values (#{deptId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="role_id" keyProperty="roleId" parameterType="com.example.yimeimaven.entity.SysRoleDeptKey" useGeneratedKeys="true">
+    insert into sys_role_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptId != null">
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

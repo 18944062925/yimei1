@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yimeimaven.dao.OrdersettingDao">
+  <resultMap id="BaseResultMap" type="com.example.yimeimaven.entity.Ordersetting">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="reservations" jdbcType="INTEGER" property="reservations" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_date, `number`, reservations
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ordersetting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ordersetting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.yimeimaven.entity.Ordersetting" useGeneratedKeys="true">
+    insert into ordersetting (order_date, `number`, reservations
+      )
+    values (#{orderDate,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER}, #{reservations,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.yimeimaven.entity.Ordersetting" useGeneratedKeys="true">
+    insert into ordersetting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderDate != null">
+        order_date,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="reservations != null">
+        reservations,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="reservations != null">
+        #{reservations,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yimeimaven.entity.Ordersetting">
+    update ordersetting
+    <set>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="reservations != null">
+        reservations = #{reservations,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yimeimaven.entity.Ordersetting">
+    update ordersetting
+    set order_date = #{orderDate,jdbcType=TIMESTAMP},
+      `number` = #{number,jdbcType=INTEGER},
+      reservations = #{reservations,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

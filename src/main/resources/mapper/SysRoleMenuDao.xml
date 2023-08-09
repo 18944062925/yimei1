@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yimeimaven.dao.SysRoleMenuDao">
+  <resultMap id="BaseResultMap" type="com.example.yimeimaven.entity.SysRoleMenuKey">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <id column="menu_id" jdbcType="BIGINT" property="menuId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.yimeimaven.entity.SysRoleMenuKey">
+    delete from sys_role_menu
+    where role_id = #{roleId,jdbcType=BIGINT}
+      and menu_id = #{menuId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="role_id" keyProperty="roleId" parameterType="com.example.yimeimaven.entity.SysRoleMenuKey" useGeneratedKeys="true">
+    insert into sys_role_menu (menu_id)
+    values (#{menuId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="role_id" keyProperty="roleId" parameterType="com.example.yimeimaven.entity.SysRoleMenuKey" useGeneratedKeys="true">
+    insert into sys_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
